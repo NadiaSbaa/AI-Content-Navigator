@@ -2,6 +2,8 @@
 
 A simple question-answering web application that utilizes the ChatGroq language model and a knowledge base of blogs. This application allows users to interact with the assistant by asking questions and receiving answers based on the provided documents.
 
+![image info](./static/app_image.png)
+
 ## Table of Contents
 
 - [Features](#features)
