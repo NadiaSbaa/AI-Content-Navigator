@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask Content Creation Assistant</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background color */
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .response {
+            margin-top: 20px;
+            border: 1px solid #007bff; /* Bootstrap primary color */
+            border-radius: 5px;
+            padding: 15px;
+            background-color: #e9ecef; /* Light gray background for response */
+        }
+        .question-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .question-input {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+        .btn-ask {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 style="text-align: center; margin-bottom: 2rem">Ask Content Creation Assistant</h1>
+    <div class="question-area">
+        <input type="text" id="user_message" class="form-control question-input" placeholder="What would you like to ask?" required>
+        <button type="button" class="btn btn-ask" id="askButton">Ask</button>
+    </div>
+    <div class="response" id="responseContainer">
+    </div>
+</div>
+
+<script>
+        document.getElementById('askButton').addEventListener('click', function() {
+            const responseContainer = document.getElementById('responseContainer');
+            responseContainer.innerHTML = `
+                    <h5>Response Loading...</h5>
+                `;
+            const userMessage = document.getElementById('user_message').value;
+            fetch('/ask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({ message: userMessage })
+            })
+            .then(response => response.text())
+            .then(data => {
+                const responseContainer = document.getElementById('responseContainer');
+                responseContainer.innerHTML = `
+                    <h5>Your Question:</h5>
+                    <p>${userMessage}</p>
+                    <h5>Response:</h5>
+                    <p>${data}</p>
+                `;
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
+
+
+
