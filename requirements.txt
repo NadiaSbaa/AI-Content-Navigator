@@ -1,4 +1,5 @@
-Flask==3.0.3                  # The web framework
-langchain==0.3.3              # The LangChain library for building applications with language models
-langchain-groq==0.2.0         # Groq integration for LangChain
-python-dotenv==1.0.1          # For loading environment variables from a .env file
+Flask==3.0.3
+langchain==0.3.3
+langchain-groq==0.2.0
+python-dotenv==1.0.1
+pytest==8.3.3
